@@ -5,7 +5,34 @@ fn main() {
 }
 
 fn part1(input: &str) -> String {
-    "142".to_string()
+    let mut vals: Vec<u32> = Vec::new();
+    for line in input.lines() {
+        dbg!(line);
+        let mut nums: Vec<u32> = Vec::new();
+        for char in line.chars() {
+            if char.is_digit(10) {
+                nums.push(char.to_digit(10).unwrap());
+            }
+        }
+
+        if nums.len() >= 2 {
+            let result = vec![nums[0], *nums.last().unwrap()]
+                .iter()
+                .map(|&num| num.to_string())
+                .collect::<String>();
+            vals.push(result.parse::<u32>().unwrap());
+        } else {
+            let result = vec![nums[0], nums[0]]
+                .iter()
+                .map(|&num| num.to_string())
+                .collect::<String>();
+            vals.push(result.parse::<u32>().unwrap());
+        }
+    }
+
+    let result: u32 = vals.iter().sum();
+    dbg!(result);
+    result.to_string()
 }
 
 #[cfg(test)]
