@@ -11,38 +11,32 @@ fn part2(input: &str) -> String {
 }
 
 fn process_line(line: &str) -> u32 {
-    let mut index = 0;
-    let line_iter = std::iter::from_fn(move || {
+    let mut it = (0..line.len()).filter_map(|index| {
         let reduced_line = &line[index..];
-
         let result = if reduced_line.starts_with("one") {
-            Some('1')
+            '1'
         } else if reduced_line.starts_with("two") {
-            Some('2')
+            '2'
         } else if reduced_line.starts_with("three") {
-            Some('3')
+            '3'
         } else if reduced_line.starts_with("four") {
-            Some('4')
+            '4'
         } else if reduced_line.starts_with("five") {
-            Some('5')
+            '5'
         } else if reduced_line.starts_with("six") {
-            Some('6')
+            '6'
         } else if reduced_line.starts_with("seven") {
-            Some('7')
+            '7'
         } else if reduced_line.starts_with("eight") {
-            Some('8')
+            '8'
         } else if reduced_line.starts_with("nine") {
-            Some('9')
+            '9'
         } else {
-            let result = reduced_line.chars().next();
-            result
+            reduced_line.chars().next().unwrap()
         };
-        index += 1;
 
-        result
+        result.to_digit(10)
     });
-
-    let mut it = line_iter.filter_map(|character| character.to_digit(10));
     let first = it.next().expect("should be a number");
 
     match it.last() {
