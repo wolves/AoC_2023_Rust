@@ -29,12 +29,10 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = part1(
-            "1abc2
+        let input = "1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
-treb7uchet",
-        );
-        assert_eq!(result, "142".to_string())
+treb7uchet";
+        assert_eq!("142", part1(input))
     }
 }
