@@ -10,19 +10,19 @@ fn part1(input: &str) -> String {
         dbg!(line);
         let mut nums: Vec<u32> = Vec::new();
         for char in line.chars() {
-            if char.is_digit(10) {
+            if char.is_ascii_digit() {
                 nums.push(char.to_digit(10).unwrap());
             }
         }
 
         if nums.len() >= 2 {
-            let result = vec![nums[0], *nums.last().unwrap()]
+            let result = [nums[0], *nums.last().unwrap()]
                 .iter()
                 .map(|&num| num.to_string())
                 .collect::<String>();
             vals.push(result.parse::<u32>().unwrap());
         } else {
-            let result = vec![nums[0], nums[0]]
+            let result = [nums[0], nums[0]]
                 .iter()
                 .map(|&num| num.to_string())
                 .collect::<String>();
