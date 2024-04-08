@@ -5,32 +5,22 @@ fn main() {
 }
 
 fn part1(input: &str) -> String {
-    let mut vals: Vec<u32> = Vec::new();
-    for line in input.lines() {
-        let mut nums: Vec<u32> = Vec::new();
-        for char in line.chars() {
-            if char.is_ascii_digit() {
-                nums.push(char.to_digit(10).unwrap());
+    let output = input
+        .lines()
+        .map(|line| {
+            let mut it = line.chars().filter_map(|character| character.to_digit(10));
+            let first = it.next().expect("should be a number");
+
+            match it.last() {
+                Some(num) => format!("{first}{num}"),
+                None => format!("{first}{first}"),
             }
-        }
+            .parse::<u32>()
+            .expect("should be a valid number")
+        })
+        .sum::<u32>();
 
-        if nums.len() >= 2 {
-            let result = [nums[0], *nums.last().unwrap()]
-                .iter()
-                .map(|&num| num.to_string())
-                .collect::<String>();
-            vals.push(result.parse::<u32>().unwrap());
-        } else {
-            let result = [nums[0], nums[0]]
-                .iter()
-                .map(|&num| num.to_string())
-                .collect::<String>();
-            vals.push(result.parse::<u32>().unwrap());
-        }
-    }
-
-    let result: u32 = vals.iter().sum();
-    result.to_string()
+    output.to_string()
 }
 
 #[cfg(test)]
