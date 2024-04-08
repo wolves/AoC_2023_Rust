@@ -7,7 +7,6 @@ fn main() {
 fn part1(input: &str) -> String {
     let mut vals: Vec<u32> = Vec::new();
     for line in input.lines() {
-        dbg!(line);
         let mut nums: Vec<u32> = Vec::new();
         for char in line.chars() {
             if char.is_ascii_digit() {
@@ -31,7 +30,6 @@ fn part1(input: &str) -> String {
     }
 
     let result: u32 = vals.iter().sum();
-    dbg!(result);
     result.to_string()
 }
 
