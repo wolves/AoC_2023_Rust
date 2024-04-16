@@ -77,10 +77,10 @@ fn process(input: &str) -> String {
         .iter()
         .enumerate()
         .fold(store, |mut acc, (index, card_score)| {
+            let to_add = *acc.get(&index).unwrap();
             for i in (index + 1)
                 ..(index + 1 + *card_score as usize)
             {
-                let to_add = *acc.get(&index).unwrap();
                 acc.entry(i)
                     .and_modify(|value| *value += to_add);
             }
